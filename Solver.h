@@ -11,9 +11,15 @@
 #include <iostream>
 class Solver {
     public:
-        Solver() = default;
+        Solver()  = default;
         ~Solver() = default;
-        void Run(std::string input_filename, std::string output_filename);
-        void create_input_file(std::string& filename, ExtractedDataTable& data);
+        void Run(
+            std::string input_filename, 
+            std::string output_filename
+        );
+        void create_input_file(
+            std::string& filename, 
+            ExtractedDataTable& data
+        );
 };
 #endif

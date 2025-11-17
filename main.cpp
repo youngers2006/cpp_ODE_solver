@@ -11,7 +11,13 @@ int main() {
     data.ODE_params = {0.0, 0.0, 0.0, 0.0, 0.0};
     data.ODE_initial_conditions = {0.0, 0.0, 0.0};
     Solver ODE_solver;
-    ODE_solver.create_input_file(input_filename, data);
-    ODE_solver.Run(input_filename, output_filename);
+    ODE_solver.create_input_file(
+        input_filename, 
+        data
+    );
+    ODE_solver.Run(
+        input_filename, 
+        output_filename
+    );
     return 0;
 };

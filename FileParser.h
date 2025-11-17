@@ -21,9 +21,18 @@ struct ExtractedDataTable {
 class FileParser {
     public: // methods must be public
         // static method to extract data from the formatted file and return a struct as defined above
-        static void extract_data(std::string& filename, ExtractedDataTable& data_table);
+        static void extract_data(
+            std::string& filename, 
+            ExtractedDataTable& data_table
+        );
         // static method to write solution table found by solver to a file
-        static void output_to_file(std::string& filename, std::vector<std::vector<double>>& data); 
-        static void create_input_file(std::string& filename, ExtractedDataTable& data);
+        static void output_to_file(
+            std::string& filename, 
+            std::vector<std::vector<double>>& data
+        ); 
+        static void create_input_file(
+            std::string& filename, 
+            ExtractedDataTable& data
+        );
 };
 #endif

@@ -5,6 +5,9 @@
 class Integrator {
     public:
         virtual ~Integrator() = default; // Destructor for the class
-        virtual void step(System& ODE, double dt) = 0;
+        virtual void step(
+            System& ODE, 
+            double dt
+        ) = 0;
 };
 #endif
