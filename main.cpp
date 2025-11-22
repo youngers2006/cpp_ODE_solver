@@ -6,7 +6,7 @@ int main() {
     ExtractedDataTable data;
     data.ODE = 0;
     data.time_scheme = 1;
-    data.T = 10.0;
+    data.T = 1000.0;
     data.dt = 0.1;
     data.ODE_params = {1.225, 0.0, 0.855, 100.0, 9.81}; // [rho0, Cl, Cd, m, g]
     data.ODE_initial_conditions = {50000.0, 100.0, 30.0}; // [h, v, gamma]
