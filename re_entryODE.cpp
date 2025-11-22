@@ -10,7 +10,7 @@ void re_entry_ODE::f(
             const std::vector<double>& y, // y = [h, v, gamma]
             double& t, 
             std::vector<double>& dydt) { // dydt = [h_, v_, gamma_], parameters = [rho0, Cl, Cd, m, g]
-                double rho = parameters[0] * exp(-y[0]);
+                double rho = parameters[0] * exp(-y[0] / 7200.0);
                 double L = (1.0 / 2.0) * rho * parameters[1] * pow(y[1],2);
                 double D = (1.0 / 2.0) * rho * parameters[2] * pow(y[1],2);
                 double h_ = - y[1] * sin((3.1415 / 180) * y[2]);
