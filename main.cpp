@@ -6,7 +6,7 @@ int main() {
     ExtractedDataTable data;
     data.ODE = 0;
     data.time_scheme = 0;
-    data.T = 10;
+    data.T = 10.0;
     data.dt = 0.1;
     data.ODE_params = {0.0, 0.0, 0.0, 0.0, 0.0};
     data.ODE_initial_conditions = {0.0, 0.0, 0.0};

@@ -3,15 +3,21 @@
 #include "system.h"
 class Satelite_dynamicsODE : public System {
     public:
+        // ODE user defined constructor.
+        // args: parameters, initial conditions, initial time.
         Satelite_dynamicsODE(
             const std::vector<double>& params, 
             const std::vector<double>& ics, 
             const double& itime
         );
+
+        // virtual evaluation function for ODE.
+        // args: state vector, time, state derivative vector.
+        // return: void. Derivative vector edited in-place.
         virtual void f(
-            std::vector<double> y, 
-            double t, 
-            std::vector<double> dydt
+            const std::vector<double>& y, 
+            double& t, 
+            std::vector<double>& dydt
         );
 };
 #endif

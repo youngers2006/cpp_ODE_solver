@@ -10,9 +10,9 @@ class re_entry_ODE : public System {
             const double& itime
         );
         virtual void f(
-            std::vector<double> y, 
-            double t, 
-            std::vector<double> dydt
+            const std::vector<double>& y, 
+            double& t, 
+            std::vector<double>& dydt
         );
 };
 #endif

@@ -7,9 +7,9 @@ re_entry_ODE::re_entry_ODE(const std::vector<double>& params,
                            const double& itime) : System(params, ics, itime) {};
 
 void re_entry_ODE::f(
-            std::vector<double> y, // y = [h, v, gamma]
-            double t, 
-            std::vector<double> dydt) { // dydt = [h_, v_, gamma_], parameters = [rho0, Cl, Cd, m, g]
+            const std::vector<double>& y, // y = [h, v, gamma]
+            double& t, 
+            std::vector<double>& dydt) { // dydt = [h_, v_, gamma_], parameters = [rho0, Cl, Cd, m, g]
                 double rho = parameters[0] * exp(-y[0]);
                 double L = (1.0 / 2.0) * rho * parameters[1] * pow(y[1],2);
                 double D = (1.0 / 2.0) * rho * parameters[2] * pow(y[1],2);
