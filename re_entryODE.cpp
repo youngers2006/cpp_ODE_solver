@@ -13,7 +13,7 @@ void re_entry_ODE::f(
                 double rho = parameters[0] * exp(-y[0]);
                 double L = (1.0 / 2.0) * rho * parameters[1] * pow(y[1],2);
                 double D = (1.0 / 2.0) * rho * parameters[2] * pow(y[1],2);
-                double h_ = - y[1] * sin(y[2]);
+                double h_ = - y[1] * sin((3.1415 / 180) * y[2]);
                 double v_ = - (D / parameters[3]) - parameters[4] * sin(y[2]);
                 double gamma_ = (L / (parameters[3] * y[1])) - (parameters[4] / y[1]) * cos(y[2]);
                 dydt[0] = h_;
