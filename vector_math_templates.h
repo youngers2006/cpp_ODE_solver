@@ -46,7 +46,7 @@ std::vector<T> operator-(const std::vector<T>& LHS, const std::vector<T>& RHS) {
 template<class T>
 std::vector<T> operator*(const T& LHS, const std::vector<T>& RHS) {
     std::vector<T> result(RHS.size());
-    for (int i = 0; i < LHS.size(); ++i) {
+    for (int i = 0; i < RHS.size(); ++i) {
         result[i] = LHS * RHS[i];
     }
     return result;

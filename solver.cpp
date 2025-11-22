@@ -8,10 +8,18 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
     std::cout << "Building System ..." << std::endl;
     switch (input_data.ODE) {
     case 0:
-        system_ptr = std::make_unique<re_entry_ODE>();
+        system_ptr = std::make_unique<re_entry_ODE>(
+            input_data.ODE_params,
+            input_data.ODE_initial_conditions,
+            0
+        );
         break;
     case 1:
-        system_ptr = std::make_unique<Satelite_dynamicsODE>();
+        system_ptr = std::make_unique<Satelite_dynamicsODE>(
+            input_data.ODE_params,
+            input_data.ODE_initial_conditions,
+            0
+        );
     default:
         throw std::runtime_error("System index out of defined bounds.");
         break;
@@ -33,12 +41,18 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
     std::vector<double> state;
     std::vector<std::vector<double>> output_table;
     std::cout << "Running Solver ..." << std::endl;
+
+    state = system_ptr->get_state();
+    state.insert(state.begin(), system_ptr->get_time());
+    output_table.push_back(state);
+
     for (double t = 0; t <= input_data.T; t += dt) {
         integrator_ptr->step(*system_ptr, dt);
         state = system_ptr->get_state();
         state.insert(state.begin(), t);
         output_table.push_back(state);
     }
+
     std::cout << "Solver Finished." << std::endl;
     std::cout << "Saving Results ..." << std::endl;
     FileParser::output_to_file(output_filename, output_table);
@@ -46,6 +60,6 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
     std::cout << "Process complete." << std::endl;
 };
 
-void create_input_file(std::string& filename, ExtractedDataTable& data) {
+void Solver::create_input_file(std::string& filename, ExtractedDataTable& data) {
     FileParser::create_input_file(filename, data);
 };
