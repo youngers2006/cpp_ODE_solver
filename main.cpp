@@ -8,7 +8,7 @@ int main() {
     data.time_scheme = 1;
     data.T = 1000.0;
     data.dt = 0.1;
-    data.ODE_params = {1.225, 0.0, 0.855, 100.0, 9.81}; // [rho0, Cl, Cd, m, g]
+    data.ODE_params = {1.225, 0.0, 0.855, 100.0, 9.81, 5.0}; // [rho0, Cl, Cd, m, g, A]
     data.ODE_initial_conditions = {50000.0, 100.0, 30.0}; // [h, v, gamma]
     Solver ODE_solver;
     ODE_solver.create_input_file(
