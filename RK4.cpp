@@ -18,7 +18,7 @@ void RK4::step(System& ODE, double dt) {
     std::vector<double> K3 = dydt * dt;
 
     std::vector<double> y_k4 = y + K3;
-    double t_k4 = t + 0.5 * dt;
+    double t_k4 = t + dt;
     ODE.f(y_k4, t_k4, dydt);
     std::vector<double> K4 = dydt * dt;
 
