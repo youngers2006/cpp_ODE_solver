@@ -6,6 +6,7 @@
 #include "system.h"
 #include "re_entryODE.h"
 #include "satelite_attitude_dynamicsODE.h"
+#include "rotational_dynamics.h"
 #include "FileParser.h"
 #include <memory>
 #include <iostream>
