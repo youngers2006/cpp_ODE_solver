@@ -1,11 +1,11 @@
 #include "Solver.h"
 
-int main() {
-    bool file_exists;
-    std::cout << "Does an input file exist" << std::endl;
-    std::cin >> file_exists;
-    std::string input_filename = "input_file.txt";
-    std::string output_filename = "output_file.txt";
+void solver() {
+    bool file_exists; 
+    std::cout << "Does an input file exist" << std::endl; 
+    std::cin >> file_exists; 
+    std::string input_filename = "input_file.txt"; 
+    std::string output_filename = "output_file.txt"; 
     Solver ODE_solver;
     if (file_exists) {
         ExtractedDataTable data;
@@ -35,5 +35,4 @@ int main() {
         input_filename, 
         output_filename
     );
-    return 0;
 };

@@ -3,10 +3,10 @@
 #include "integrator.h"
 #include "RK4.h"
 #include "Euler_f.h"
+#include "BackwardEuler.h"
 #include "system.h"
 #include "re_entryODE.h"
 #include "satelite_attitude_dynamicsODE.h"
-#include "rotational_dynamics.h"
 #include "FileParser.h"
 #include <memory>
 #include <iostream>

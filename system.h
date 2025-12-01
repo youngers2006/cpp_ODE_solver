@@ -52,5 +52,11 @@ class System {
             double& t, 
             std::vector<double>& dydt
         ) = 0;
+
+        virtual void jac(
+            const std::vector<double>& y,
+            double t,
+            std::vector<std::vector<double>>& jac
+        ) = 0;
 };
 #endif

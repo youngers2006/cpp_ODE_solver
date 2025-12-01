@@ -1,11 +1,12 @@
-#ifndef RKF45_H
-#define RKF45_H
+#ifndef BACKWARDEULER_H
+#define BACKWARDEULER_H
 #include "integrator.h"
+#include "NewtonRaphson.h"
 // RK4 Integrator class - inherets from base class Iterator.
-class RKF45 : public Integrator {
+class BackwardEuler : public Integrator {
     public:
         // Default destructor for forward euler integrator.
-        virtual ~RKF45() = default;
+        virtual ~BackwardEuler() = default;
 
         // Step function for RK4 - takes one timestep and modifies the system state by the step.
         // args: System object passed by reference, timestep

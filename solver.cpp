@@ -20,12 +20,6 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
             input_data.ODE_initial_conditions,
             0
         );
-    case 2:
-        system_ptr = std::make_unique<RotationalDynamicsODE>(
-            input_data.ODE_params,
-            input_data.ODE_initial_conditions,
-            0
-        );
     default:
         throw std::runtime_error("System index out of defined bounds.");
         break;
@@ -37,6 +31,9 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
         break;
     case 1:
         integrator_ptr = std::make_unique<RK4>();
+        break;
+    case 2:
+        integrator_ptr = std::make_unique<BackwardEuler>();
         break;
     default:
         throw std::runtime_error("Integration index out of defined bounds.");
