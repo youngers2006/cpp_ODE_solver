@@ -5,19 +5,19 @@ satellite_dynamics()
 
 function satellite_dynamics()
     Ix = 100; 
-    Iy = 1000;
+    Iy = 500;
     Iz = 400;
 
     % [omega_x; omega_y; omega_z]
-    w0 = [20.0; 50.0; 10.0]; 
-    t_span = [0 1000];
+    w0 = [2.0; 0.5; 1.0]; 
+    t_span = [0 10];
     ode_fun = @(t, w) euler_equations(t, w, Ix, Iy, Iz);
 
     options = odeset('RelTol', 1e-6, 'AbsTol', 1e-6);
     [T, W] = ode45(ode_fun, t_span, w0, options);
 
     figure('Name', 'Satellite Attitude Dynamics', 'Color', 'w');
-    
+    hold on
     plot(T, W(:,1), 'r', 'LineWidth', 1.5, 'DisplayName', '\omega_x'); hold on;
     plot(T, W(:,2), 'g', 'LineWidth', 1.5, 'DisplayName', '\omega_y');
     plot(T, W(:,3), 'b', 'LineWidth', 1.5, 'DisplayName', '\omega_z');
@@ -27,15 +27,18 @@ function satellite_dynamics()
     ylabel('Angular Velocity (rad/s)');
     legend('show');
     grid on;
-    
-    % KE = 0.5 * (Ix * W(:,1).^2 + Iy * W(:,2).^2 + Iz * W(:,3).^2);
-    % figure('Name', 'Energy Check', 'Color', 'w');
-    % plot(T, KE, 'k-', 'LineWidth', 1.5);
-    % title('Rotational Kinetic Energy (Check for Conservation)');
-    % xlabel('Time (s)');
-    % ylabel('Energy (J)');
-    % grid on;
-    % ylim([min(KE)*0.95, max(KE)*1.05]);
+    hold off
+
+    KE = 0.5 * (Ix * W(:,1).^2 + Iy * W(:,2).^2 + Iz * W(:,3).^2);
+    figure('Name', 'Energy Check', 'Color', 'w');
+    plot(T, KE, 'k-', 'LineWidth', 1.5);
+    hold on;
+    title('Rotational Kinetic Energy');
+    xlabel('Time (s)');
+    ylabel('Energy (J)');
+    grid on;
+    ylim([min(KE)*0.95, max(KE)*1.05]);
+    hold off;
 end
 
 function dw_dt = euler_equations(~, w, Ix, Iy, Iz)
