@@ -19,6 +19,6 @@ class re_entry_ODE : public System {
             const std::vector<double>& y,
             double t,
             std::vector<std::vector<double>>& jac
-        ) = 0;
+        );
 };
 #endif

@@ -23,4 +23,4 @@ void Satelite_dynamicsODE::jac(const std::vector<double>& y, double t, std::vect
     jac[2][0] = ((parameters[0] - parameters[1]) / parameters[2]) * y[1];
     jac[2][1] = ((parameters[0] - parameters[1]) / parameters[2]) * y[0];
     jac[2][2] = 0;
-}
+};

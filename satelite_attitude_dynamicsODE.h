@@ -24,6 +24,6 @@ class Satelite_dynamicsODE : public System {
             const std::vector<double>& y,
             double t,
             std::vector<std::vector<double>>& jac
-        ) = 0;
+        );
 };
 #endif

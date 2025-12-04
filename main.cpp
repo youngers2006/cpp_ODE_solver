@@ -1,5 +1,4 @@
 #include "Solver.h"
-
 void solver() {
     bool file_exists; 
     std::cout << "Does an input file exist" << std::endl; 
@@ -7,10 +6,10 @@ void solver() {
     std::string input_filename = "input_file.txt"; 
     std::string output_filename = "output_file.txt"; 
     Solver ODE_solver;
-    if (file_exists) {
+    if (!file_exists) {
         ExtractedDataTable data;
         data.ODE = 0;
-        data.time_scheme = 1;
+        data.time_scheme = 1.0;
         data.T = 1000.0;
         data.dt = 0.1;
         data.ODE_params = {

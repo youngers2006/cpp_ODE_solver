@@ -85,10 +85,10 @@ std::vector<std::vector<double>> eye(const int& rows, const int& columns) {
 
 // Template operator overload for scalar multiplication of a matrix when LHS is scalar.
 template<class T>
-std::vector<T> operator*(const T& LHS, const std::vector<std::vector<T>>& RHS) {
+std::vector<std::vector<T>> operator*(const T& LHS, const std::vector<std::vector<T>>& RHS) {
     int rows = RHS.size();
     int cols = RHS[0].size();
-    std::vector<T> result(rows, std::vector<double>(cols, 0.0));
+    std::vector<std::vector<T>> result(rows, std::vector<double>(cols, 0.0));
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < cols; ++col) {
             result[row][col] = LHS * RHS[row][col];
@@ -99,10 +99,10 @@ std::vector<T> operator*(const T& LHS, const std::vector<std::vector<T>>& RHS) {
 
 // Template operator overload for scalar multiplication of a matrix when RHS is scalar.
 template<class T>
-std::vector<T> operator*(const std::vector<std::vector<T>>& LHS, const T& RHS) {
+std::vector<std::vector<T>> operator*(const std::vector<std::vector<T>>& LHS, const T& RHS) {
     int rows = LHS.size();
     int cols = LHS[0].size();
-    std::vector<T> result(rows, std::vector<double>(cols, 0.0));
+    std::vector<std::vector<T>> result(rows, std::vector<double>(cols, 0.0));
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < cols; ++col) {
             result[row][col] = LHS[row][col] * RHS;
@@ -112,7 +112,7 @@ std::vector<T> operator*(const std::vector<std::vector<T>>& LHS, const T& RHS) {
 }
 
 template<class T>
-std::vector<T> operator-(const std::vector<std::vector<T>>& LHS, const std::vector<std::vector<T>>& RHS) {
+std::vector<std::vector<T>> operator-(const std::vector<std::vector<T>>& LHS, const std::vector<std::vector<T>>& RHS) {
     int rows1 = RHS.size();
     int cols1 = RHS[0].size();
     int rows2 = LHS.size();
@@ -120,7 +120,7 @@ std::vector<T> operator-(const std::vector<std::vector<T>>& LHS, const std::vect
     if (rows1 != rows2 || cols1 != cols2) {
         throw std::invalid_argument("Matricies must be of equal size when subtracting.");
     }
-    std::vector<T> result(rows1, std::vector<double>(cols1, 0.0));
+    std::vector<std::vector<T>> result(rows1, std::vector<double>(cols1, 0.0));
     for (int row = 0; row < rows1; ++row) {
         for (int col = 0; col < cols1; ++col) {
             result[row][col] = LHS[row][col] - RHS[row][col];
