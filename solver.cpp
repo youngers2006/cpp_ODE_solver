@@ -20,6 +20,7 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
             input_data.ODE_initial_conditions,
             0
         );
+        break;
     default:
         throw std::runtime_error("System index out of defined bounds.");
         break;
@@ -36,7 +37,7 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
         integrator_ptr = std::make_unique<BackwardEuler>();
         break;
     default:
-        throw std::runtime_error("Integration index out of defined bounds.");
+        throw std::runtime_error("Integrator index out of defined bounds.");
         break;
     }
     
