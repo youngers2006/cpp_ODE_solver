@@ -1,4 +1,4 @@
-#include "NewtonRaphson.h"
+#include "NewtonRaphsonSolver.h"
 std::vector<double> NewtonRaphsonSolver(
     System& ODE, 
     std::vector<double> y0, 

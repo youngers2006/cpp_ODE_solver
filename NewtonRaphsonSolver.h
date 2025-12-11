@@ -1,5 +1,5 @@
-#ifndef NEWTONRAPHSON_H
-#define NEWTONRAPHSON_H
+#ifndef NEWTONRAPHSONSolver_H
+#define NEWTONRAPHSONSolver_H
 #include <cmath>
 #include <iostream>
 #include "system.h"

@@ -1,7 +1,7 @@
 #ifndef BACKWARDEULER_H
 #define BACKWARDEULER_H
 #include "integrator.h"
-#include "NewtonRaphson.h"
+#include "NewtonRaphsonSolver.h"
 // RK4 Integrator class - inherets from base class Iterator.
 class BackwardEuler : public Integrator {
     public:
