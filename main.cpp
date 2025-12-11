@@ -1,11 +1,16 @@
 #include "Solver.h"
 int main() {
     bool file_exists; 
-    std::cout << "Does an input file exist" << std::endl; 
-    std::cin >> file_exists; 
+    std::cout << "Does an input file exist (y/n)" << std::endl; 
+
+    char response;
+    std::cin >> response;
+    bool file_exists = (response == 'y' || response == 'Y');
+
     std::string input_filename = "input_file.txt"; 
     std::string output_filename = "output_file.txt"; 
     Solver ODE_solver;
+
     if (!file_exists) {
         ExtractedDataTable data;
         data.ODE = 0;
@@ -30,6 +35,7 @@ int main() {
             data
         );
     }
+    
     ODE_solver.Run(
         input_filename, 
         output_filename

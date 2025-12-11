@@ -50,7 +50,10 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
     state.insert(state.begin(), system_ptr->get_time());
     output_table.push_back(state);
 
-    for (double t = dt; t <= input_data.T; t += dt) {
+    int num_steps = std::round(input_data.T / input_data.dt);
+    double t = 0;
+    for (int step = 1; step <= num_steps; ++step) {
+        t = step * input_data.dt;
         integrator_ptr->step(*system_ptr, dt);
         state = system_ptr->get_state();
         state.insert(state.begin(), t);
