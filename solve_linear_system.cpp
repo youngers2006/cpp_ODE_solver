@@ -1,10 +1,8 @@
-#ifndef GAUSSIAN_ELIM_H
-#define GAUSSIAN_ELIM_H
-#include <cmath>
-#include <vector>
-#include <iostream>
-
-std::vector<double> solve_linear_system(std::vector<std::vector<double>> A, std::vector<double> b) {
+#include "solve_linear_system.h"
+std::vector<double> solve_linear_system(
+    std::vector<std::vector<double>> A, 
+    std::vector<double> b
+) {
     int n = A.size(); // Number of rows/variables
 
     // Forward Elimination with Partial Pivoting
@@ -56,5 +54,4 @@ std::vector<double> solve_linear_system(std::vector<std::vector<double>> A, std:
     }
 
     return x;
-}
-#endif
+};

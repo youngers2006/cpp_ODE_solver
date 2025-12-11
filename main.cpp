@@ -1,5 +1,5 @@
 #include "Solver.h"
-void solver() {
+int main() {
     bool file_exists; 
     std::cout << "Does an input file exist" << std::endl; 
     std::cin >> file_exists; 
@@ -34,4 +34,5 @@ void solver() {
         input_filename, 
         output_filename
     );
+    return 0;
 };
