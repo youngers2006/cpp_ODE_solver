@@ -1,11 +1,11 @@
-#ifndef SATELITE_ATTITUDE_DYNAMICS_H
-#define SATELITE_ATTITUDE_DYNAMICS_H
+#ifndef SATELLITE_ATTITUDE_DYNAMICS_H
+#define SATELLITE_ATTITUDE_DYNAMICS_H
 #include "system.h"
-class Satelite_dynamicsODE : public System {
+class Satellite_dynamicsODE : public System {
     public:
         // ODE user defined constructor.
         // args: parameters, initial conditions, initial time.
-        Satelite_dynamicsODE(
+        Satellite_dynamicsODE(
             const std::vector<double>& params, 
             const std::vector<double>& ics, 
             const double& itime

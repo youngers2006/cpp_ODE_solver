@@ -15,7 +15,7 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
         );
         break;
     case 1:
-        system_ptr = std::make_unique<Satelite_dynamicsODE>(
+        system_ptr = std::make_unique<Satellite_dynamicsODE>(
             input_data.ODE_params,
             input_data.ODE_initial_conditions,
             0

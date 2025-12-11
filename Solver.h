@@ -6,7 +6,7 @@
 #include "BackwardEuler.h"
 #include "system.h"
 #include "re_entryODE.h"
-#include "satelite_attitude_dynamicsODE.h"
+#include "satellite_attitude_dynamicsODE.h"
 #include "FileParser.h"
 #include <memory>
 #include <iostream>

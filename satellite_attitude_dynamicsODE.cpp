@@ -1,10 +1,10 @@
-#include "satelite_attitude_dynamicsODE.h"
-Satelite_dynamicsODE::Satelite_dynamicsODE(
+#include "satellite_attitude_dynamicsODE.h"
+Satellite_dynamicsODE::Satellite_dynamicsODE(
     const std::vector<double>& params, 
     const std::vector<double>& ics, 
     const double& itime) : System(params, ics, itime) {};
 
-void Satelite_dynamicsODE::f(const std::vector<double>& y, double& t, std::vector<double>& dydt) { // y = [wx, wy, wz], params = [Ix, Iy, Iz]
+void Satellite_dynamicsODE::f(const std::vector<double>& y, double& t, std::vector<double>& dydt) { // y = [wx, wy, wz], params = [Ix, Iy, Iz]
     double wx_ = ((parameters[1] - parameters[2]) / parameters[0]) * y[1] * y[2];
     double wy_ = ((parameters[2] - parameters[0]) / parameters[1]) * y[2] * y[0];
     double wz_ = ((parameters[0] - parameters[1]) / parameters[2]) * y[0] * y[1];
@@ -13,7 +13,7 @@ void Satelite_dynamicsODE::f(const std::vector<double>& y, double& t, std::vecto
     dydt[2] = wz_;
 };
 
-void Satelite_dynamicsODE::jac(const std::vector<double>& y, double t, std::vector<std::vector<double>>& jac) {
+void Satellite_dynamicsODE::jac(const std::vector<double>& y, double t, std::vector<std::vector<double>>& jac) {
     jac[0][0] = 0;
     jac[0][1] = ((parameters[1] - parameters[2]) / parameters[0]) * y[2];
     jac[0][2] = ((parameters[1] - parameters[2]) / parameters[0]) * y[1];
