@@ -12,17 +12,21 @@ void FileParser::extract_data(std::string& filename, ExtractedDataTable& data_ta
 
     // read the first 3 lines of the file which should contain all required data.
     std::string line1, line2, line3;
-    std::getline(rfile, line1);
-    std::getline(rfile, line2);
-    std::getline(rfile, line3);
+    if (!std::getline(rfile, line1) || !std::getline(rfile, line2) || !std::getline(rfile, line3)) {
+        throw std::runtime_error("Input file is incomplete. It must contain at least 3 lines.");
+    }
 
     // strip the first line down to obtain all solver settings by converting it to a string stream.
     std::stringstream sstream;
     sstream << line1;
-    sstream >> data_table.ODE;
-    sstream >> data_table.time_scheme;
-    sstream >> data_table.T;
-    sstream >> data_table.dt;
+    if (!(sstream >> data_table.ODE >> data_table.time_scheme >> data_table.T >> data_table.dt)) {
+        throw std::runtime_error("Line 1 formatting error: Expected [ODE_ID] [Scheme_ID] [T] [dt]");
+    }
+
+    // check data is numeric
+    if (data_table.dt <= 0) {
+        throw std::runtime_error("Time step (dt) must be positive.");
+    }
 
     // clear the last data from the string stream.
     sstream.clear();
@@ -35,6 +39,12 @@ void FileParser::extract_data(std::string& filename, ExtractedDataTable& data_ta
     while (sstream >> val) {
         param_vec.push_back(val);
     }
+
+    // check the data is numeric
+    if (!sstream.eof()) {
+        throw std::runtime_error("Formatting error in Line 2: Parameters contains non-numeric characters.");
+    }
+
     data_table.ODE_params = param_vec;
 
     // clear the last data from the string stream.
@@ -47,6 +57,11 @@ void FileParser::extract_data(std::string& filename, ExtractedDataTable& data_ta
     while (sstream >> val) {
         init_vec.push_back(val);
     }
+
+    if (!sstream.eof()) {
+        throw std::runtime_error("Formatting error in Line 3: Parameters contains non-numeric characters.");
+    }
+
     data_table.ODE_initial_conditions = init_vec;
 };
 

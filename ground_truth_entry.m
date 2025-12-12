@@ -5,7 +5,6 @@ rho0 = 1.225;
 h0 = 100000.0;
 v0 = 1000.0;
 gamma0 = 180.0;
-gamma0 = (pi / 180.0) * gamma0;
 y0 = [h0; v0; gamma0];
 Cl = 0.6;
 Cd = 1.2;
@@ -13,24 +12,142 @@ m = 100.0;
 g = 9.81;
 S = 0.5;
 
-T = [0 500];
+T = [0 5000];
 
 ode_fun = @(t, y) reentry_equations(y, rho0, Cl, Cd, m, g, S);
-options = odeset('RelTol', 1e-6, 'AbsTol', 1e-6);
+options = odeset('RelTol', 1e-12, 'AbsTol', 1e-14);
 [t, y] = ode45(ode_fun, T, y0, options);
 
+data_FE1 = load("FE_RE_1.txt");
+data_RK41 = load("RK4_RE_1.txt");
+data_IE1 = load("IE_RE_1.txt");
+
+t_FE1 = data_FE1(:, 1);
+y_FE1 = data_FE1(:, 2:end);
+
+t_RK41 = data_RK41(:, 1);
+y_RK41 = data_RK41(:, 2:end);
+
+t_IE1 = data_IE1(:, 1);
+y_IE1 = data_IE1(:, 2:end);
+
+data_FE2 = load("FE_RE_2.txt");
+data_RK42 = load("RK4_RE_2.txt");
+data_IE2 = load("IE_RE_2.txt");
+
+t_FE2 = data_FE2(:, 1);
+y_FE2 = data_FE2(:, 2:end);
+
+t_RK42 = data_RK42(:, 1);
+y_RK42 = data_RK42(:, 2:end);
+
+t_IE2 = data_IE2(:, 1);
+y_IE2 = data_IE2(:, 2:end);
+
+data_FE3 = load("FE_RE_3.txt");
+data_RK43 = load("RK4_RE_3.txt");
+data_IE3 = load("IE_RE_3.txt");
+
+t_FE3 = data_FE3(:, 1);
+y_FE3 = data_FE3(:, 2:end);
+
+t_RK43 = data_RK43(:, 1);
+y_RK43 = data_RK43(:, 2:end);
+
+t_IE3 = data_IE3(:, 1);
+y_IE3 = data_IE3(:, 2:end);
+
+data_FE4 = load("FE_RE_4.txt");
+data_RK44 = load("RK4_RE_4.txt");
+data_IE4 = load("IE_RE_4.txt");
+
+t_FE4 = data_FE4(:, 1);
+y_FE4 = data_FE4(:, 2:end);
+
+t_RK44 = data_RK44(:, 1);
+y_RK44 = data_RK44(:, 2:end);
+
+t_IE4 = data_IE4(:, 1);
+y_IE4 = data_IE4(:, 2:end);
+
+data_FE5 = load("FE_RE_5.txt");
+data_RK45 = load("RK4_RE_5.txt");
+data_IE5 = load("IE_RE_5.txt");
+
+t_FE5 = data_FE5(:, 1);
+y_FE5 = data_FE5(:, 2:end);
+
+t_RK45 = data_RK45(:, 1);
+y_RK45 = data_RK45(:, 2:end);
+
+t_IE5 = data_IE5(:, 1);
+y_IE5 = data_IE5(:, 2:end); % y = [h, v, gamma]
+
+
 figure('Name', 'Rentry Vehicle', 'Color', 'w');
-plot(t, y(:,1), 'r', 'LineWidth', 1.5, 'DisplayName', 'altitude'); % hold on;
-figure('Name', 'Rentry Vehicle', 'Color', 'w');
-plot(t, y(:,2), 'g', 'LineWidth', 1.5, 'DisplayName', 'velocity');
-figure('Name', 'Rentry Vehicle', 'Color', 'w');
-plot(t, y(:,3), 'b', 'LineWidth', 1.5, 'DisplayName', 'angle');
-    
-title('Reentry dynamics vs Time');
+plot(t, y(:,1), 'k-', 'LineWidth', 1.5, 'DisplayName', 'h (ode45)'); % hold on;
+hold on; grid on;
+plot(t_FE1, y_FE1(:, 1), 'g--', 'LineWidth', 1.5, 'DisplayName', 'h (EE)')
+plot(t_RK41, y_RK41(:, 1), 'r--', 'LineWidth', 1.5, 'DisplayName', 'h (RK4)')
+plot(t_IE1, y_IE1(:, 1), 'b--', 'LineWidth', 1.5, 'DisplayName', 'h (IE)')
+
+title('Altitude vs Time (dt = 0.1)');
 xlabel('Time (s)');
-ylabel('m / ms^-1 / radians');
+ylabel('Altitude / m');
 legend('show');
-grid on;
+hold off;
+
+figure('Name', 'Rentry Vehicle', 'Color', 'w');
+plot(t, y(:,2), 'k-', 'LineWidth', 1.5, 'DisplayName', 'v (ode45)');
+hold on; grid on;
+plot(t_FE1, y_FE1(:, 2), 'g--', 'LineWidth', 1.5, 'DisplayName', 'v (EE)')
+plot(t_RK41, y_RK41(:, 2), 'r--', 'LineWidth', 1.5, 'DisplayName', 'v (RK4)')
+plot(t_IE1, y_IE1(:, 2), 'b--', 'LineWidth', 1.5, 'DisplayName', 'v (IE)')
+
+title('Velocity vs Time (dt = 0.1)');
+xlabel('Time (s)');
+ylabel('Velocity / ms^-1');
+legend('show');
+hold off;
+
+figure('Name', 'Rentry Vehicle', 'Color', 'w');
+plot(t, y(:,3), 'b', 'LineWidth', 1.5, 'DisplayName', 'gamma (ode45)');
+hold on; grid on;
+plot(t_FE1, y_FE1(:, 3), 'g--', 'LineWidth', 1.5, 'DisplayName', 'gamma (EE)')
+plot(t_RK41, y_RK41(:, 3), 'r--', 'LineWidth', 1.5, 'DisplayName', 'gamma (RK4)')
+plot(t_IE1, y_IE1(:, 3), 'b--', 'LineWidth', 1.5, 'DisplayName', 'gamma (IE)')
+
+title('Descent Angle vs Time (dt = 0.1)');
+xlabel('Time (s)');
+ylabel('gamma / Degrees');
+legend('show');
+hold off;
+
+figure('Name', 'Rentry Vehicle', 'Color', 'w');
+plot(y(:,2), y(:,1), 'b', 'LineWidth', 1.5, 'DisplayName', 'ode45');
+hold on; grid on;
+plot(y_FE1(:, 2), y_FE1(:, 1), 'g--', 'LineWidth', 1.5, 'DisplayName', 'EE')
+plot(y_RK41(:, 2), y_RK41(:, 1), 'r--', 'LineWidth', 1.5, 'DisplayName', 'RK4')
+plot(y_IE1(:, 2), y_IE1(:, 1), 'b--', 'LineWidth', 1.5, 'DisplayName', 'IE')
+
+title('Phase Space (dt = 0.1)');
+xlabel('v / ms^-1');
+ylabel('h / m');
+legend('show', 'Location','southeast');
+hold off;
+
+exportgraphics(figure(1), 'h_plot.png', 'Resolution', 300);
+exportgraphics(figure(2), 'v_plot.png', 'Resolution', 300);
+exportgraphics(figure(3), 'gam_plot.png', 'Resolution', 300);
+exportgraphics(figure(4), 'phase_plot.png', 'Resolution', 300);
+
+true_FE = interp1(t, y(:,1), t_FE1, 'spline');
+true_RK4 = interp1(t, y(:,1), t_RK41, 'spline');
+true_IE = interp1(t, y(:,1), t_IE1, 'spline');
+
+err1 = mean(abs(true_FE - y_FE1(:,1)));
+err2 = mean(abs(true_RK4 - y_RK41(:,1)));
+err3 = mean(abs(true_IE - y_IE1(:,1)));
 
 function dydt = reentry_equations(y, rho0, Cl, Cd, m, g, S)
     % Inputs
