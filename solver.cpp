@@ -7,7 +7,14 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
     std::cout << "Loading Input Data ..." << std::endl;
 
     // use helper class to extract data from input file.
-    FileParser::extract_data(input_filename, input_data);
+    try {
+        FileParser::extract_data(input_filename, input_data);
+    } catch (const std::exception& e) {
+        // notify user of error and log results up to this point.
+        std::cerr << "Failed to open input file" << std::endl;
+        std::cerr << "Reason: " << e.what() << std::endl;
+        throw;
+    }
 
     // initialise unique pointers for intergrator and system classes, choice has not occured yet so initialise as abstact class.
     std::unique_ptr<System>     system_ptr;

@@ -1,43 +1,20 @@
 #include "Solver.h"
 int main() {
-    std::cout << "Does an input file exist (y/n)" << std::endl; 
-
-    char response;
-    std::cin >> response;
-    bool file_exists = (response == 'y' || response == 'Y');
-
     std::string input_filename = "parameters.txt"; 
     std::string output_filename = "output_file.txt"; 
-    Solver ODE_solver;
 
-    if (!file_exists) {
-        ExtractedDataTable data;
-        data.ODE = 0;
-        data.time_scheme = 1.0;
-        data.T = 1000.0;
-        data.dt = 0.1;
-        data.ODE_params = {
-            0.15, 
-            0.1, 
-            0.855, 
-            100.0, 
-            9.81, 
-            5.0
-        }; // [rho0, Cl, Cd, m, g, A]
-        data.ODE_initial_conditions = {
-            50000.0, 
-            100.0, 
-            30.0
-        }; // [h, v, gamma]
-        ODE_solver.create_input_file(
+    try {
+        // 
+        Solver ODE_solver;
+        ODE_solver.Run(
             input_filename, 
-            data
+            output_filename
         );
+    } catch (const std::exception& e) {
+        // notify user of error.
+        std::cerr << "Solver failed to solve system" << std::endl;
+        std::cerr << "Reason: " << e.what() << std::endl;
+        return 1;
     }
-    
-    ODE_solver.Run(
-        input_filename, 
-        output_filename
-    );
     return 0;
 };
