@@ -36,9 +36,9 @@ int main() {
         );
     }
     
-    ODE_solver.Run(
-        input_filename, 
-        output_filename
-    );
+    //ODE_solver.Run(
+    //    input_filename, 
+    //    output_filename
+    //);
     return 0;
 };

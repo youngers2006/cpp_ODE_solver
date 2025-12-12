@@ -6,6 +6,7 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
     std::unique_ptr<System>     system_ptr;
     std::unique_ptr<Integrator> integrator_ptr;
     std::cout << "Building System ..." << std::endl;
+    
     switch (input_data.ODE) {
     case 0:
         system_ptr = std::make_unique<re_entry_ODE>(
@@ -52,12 +53,21 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
 
     int num_steps = std::round(input_data.T / input_data.dt);
     double t = 0;
-    for (int step = 1; step <= num_steps; ++step) {
-        t = step * input_data.dt;
-        integrator_ptr->step(*system_ptr, dt);
-        state = system_ptr->get_state();
-        state.insert(state.begin(), t);
-        output_table.push_back(state);
+
+    try {
+        for (int step = 1; step <= num_steps; ++step) {
+            t = step * input_data.dt;
+            integrator_ptr->step(*system_ptr, dt);
+            state = system_ptr->get_state();
+            state.insert(state.begin(), t);
+            output_table.push_back(state);
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Solver failed at t = " << t << "seconds" << std::endl;
+        std::cerr << "Reason: " << e.what() << std::endl;
+        std::cerr << "Saving partial results to: " << output_filename << std::endl;
+        FileParser::output_to_file(output_filename, output_table);
+        throw;
     }
 
     std::cout << "Solver Finished." << std::endl;

@@ -1,6 +1,7 @@
 #ifndef VECTOR_MATH_TEMPLATES_H
 #define VECTOR_MATH_TEMPLATES_H
 #include <vector>
+#include <cmath>
 #include <stdexcept>
 
 // Template operator overload for vector elementwise multiplication.
