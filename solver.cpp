@@ -105,14 +105,24 @@ void Solver::Run(std::string input_filename, std::string output_filename) {
         std::cerr << "Solver failed at t = " << t << "seconds" << std::endl;
         std::cerr << "Reason: " << e.what() << std::endl;
         std::cerr << "Saving partial results to: " << output_filename << std::endl;
-        FileParser::output_to_file(output_filename, output_table);
+        try {
+            FileParser::output_to_file(output_filename, output_table);
+        } catch (const std::exception& save_error) {
+            std::cerr << "Warning: Could not save partial results." << std::endl;
+            std::cerr << "Save Error: " << save_error.what() << std::endl;
+        }
         throw;
     }
 
     // If the solver is successful, notify the user and save data.
     std::cout << "Solver Finished." << std::endl;
     std::cout << "Saving Results ..." << std::endl;
-    FileParser::output_to_file(output_filename, output_table);
+    try {
+        FileParser::output_to_file(output_filename, output_table);
+    } catch (const std::exception& e) {
+        std::cerr << "Save failed" << std::endl;
+        std::cerr << "Reason: " << e.what() << std::endl;
+    }
     std::cout << "Save successful." << std::endl;
     std::cout << "Process complete." << std::endl;
 };
