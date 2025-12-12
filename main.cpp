@@ -1,7 +1,7 @@
 #include "Solver.h"
 int main() {
     std::string input_filename = "parameters.txt"; 
-    std::string output_filename = "output_file.txt"; 
+    std::string output_filename = "output.txt"; 
 
     try {
         // attempt to run solver
