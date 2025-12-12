@@ -20,6 +20,9 @@ class Satellite_dynamicsODE : public System {
             std::vector<double>& dydt
         );
 
+        // virtual jacobian function for ODE.
+        // args: state vector, time, state derivative vector.
+        // return: void. Derivative vector edited in-place.
         virtual void jac(
             const std::vector<double>& y,
             double t,

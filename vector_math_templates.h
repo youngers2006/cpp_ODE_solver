@@ -63,6 +63,7 @@ std::vector<T> operator*(const std::vector<T>& LHS, const T& RHS) {
     return result;
 }
 
+// template to calculate the norm of a vector v.
 template<class T>
 double vector_norm(const std::vector<T>& v) {
     double sum_sq = 0.0;
@@ -72,12 +73,14 @@ double vector_norm(const std::vector<T>& v) {
     return std::sqrt(sum_sq);
 }
 
-std::vector<std::vector<double>> eye(const int& rows, const int& columns) {
-    std::vector<std::vector<double>> I(rows, std::vector<double>(columns, 0.0));
+// template to obtain the identity matrix of a given size n.
+template<class T>
+std::vector<std::vector<T>> eye(const int& rows, const int& columns) {
+    std::vector<std::vector<T>> I(rows, std::vector<T>(columns, static_cast<T>(0)));
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < columns; ++col) {
             if (row == col) {
-                I[row][col] = 1.0;
+                I[row][col] = static_cast<T>(1);
             } 
         }
     }
@@ -112,6 +115,7 @@ std::vector<std::vector<T>> operator*(const std::vector<std::vector<T>>& LHS, co
     return result;
 }
 
+// template operator overload for matrix subraction.
 template<class T>
 std::vector<std::vector<T>> operator-(const std::vector<std::vector<T>>& LHS, const std::vector<std::vector<T>>& RHS) {
     int rows1 = RHS.size();

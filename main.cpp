@@ -1,6 +1,5 @@
 #include "Solver.h"
 int main() {
-    bool file_exists; 
     std::cout << "Does an input file exist (y/n)" << std::endl; 
 
     char response;
@@ -8,7 +7,7 @@ int main() {
     bool file_exists = (response == 'y' || response == 'Y');
 
     std::string input_filename = "input_file.txt"; 
-    std::string output_filename = "output_file.txt"; 
+    std::string output_filename = "IE_sat_1.txt"; 
     Solver ODE_solver;
 
     if (!file_exists) {
@@ -36,9 +35,9 @@ int main() {
         );
     }
     
-    //ODE_solver.Run(
-    //    input_filename, 
-    //    output_filename
-    //);
+    ODE_solver.Run(
+        input_filename, 
+        output_filename
+    );
     return 0;
 };
