@@ -58,6 +58,8 @@ void FileParser::output_to_file(std::string& filename, std::vector<std::vector<d
     if (!data_file.is_open()) {
         throw std::invalid_argument("Could not create the file under the requested filename, please retry.");
     }
+    // set precision to float precision 
+    data_file << std::scientific << std::setprecision(15);
 
     // create first element mask.
     bool first_element;

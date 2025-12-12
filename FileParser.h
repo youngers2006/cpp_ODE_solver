@@ -6,6 +6,7 @@
 #include <istream>
 #include <fstream>
 #include <stdexcept>
+#include <iomanip>
 
 // Struct to store data imported from input file
 // Members: ODE idx, time scheme idx, T, dt, parameters, initial conditions

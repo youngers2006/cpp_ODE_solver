@@ -63,7 +63,7 @@ hold off
 KE_gt = 0.5 * (Ix * W(:,1).^2 + Iy * W(:,2).^2 + Iz * W(:,3).^2);
 KE_FE = 0.5 * (Ix * wx_FE.^2 + Iy * wy_FE.^2 + Iz * wz_FE.^2);
 KE_RK4 = 0.5 * (Ix * wx_RK4.^2 + Iy * wy_RK4.^2 + Iz * wz_RK4.^2);
-KE_IE = 0.5 * (Ix * wx_IE.^2 + Iy * wy_IE.^2 + Iz * wz_IE.^2);
+KE_IE = 0.5 * (Ix * wx_IE.^2 + Iy * wx_IE.^2 + Iz * wz_IE.^2);
 
 figure('Name', 'Energy Check', 'Color', 'w');
 plot(T, KE_gt, 'k-', 'LineWidth', 1.5, 'DisplayName', 'ode45');
@@ -184,29 +184,29 @@ wx_true5_IE = interp1(T, W(:,1), t_IE5, 'spline');
 wx_true_RK4 = interp1(T, W(:,1), t_RK4, 'spline');
 wx_true2_RK4 = interp1(T, W(:,1), t_RK42, 'spline');
 wx_true3_RK4 = interp1(T, W(:,1), t_RK43, 'spline');
-wx_true4_RK4 = interp1(T, W(:,1), t_RK44, 'spline');
-wx_true5_RK4 = interp1(T, W(:,1), t_RK45, 'spline');
+wx_true4_RK4 = interp1(T, W(:,1), t_FE4, 'spline');
+wx_true5_RK4 = interp1(T, W(:,1), t_FE5, 'spline');
 
 
-error1_FE = mean(abs(wx_FE - wx_true_FE));
-error1_RK4 = mean(abs(wx_RK4 - wx_true_RK4));
-error1_IE = mean(abs(wx_IE - wx_true_IE));
+error1_FE = mean(abs(wx_FE - wx_true));
+error1_RK4 = mean(abs(wx_RK4 - wx_true));
+error1_IE = mean(abs(wx_IE - wx_true));
 
-error2_FE = mean(abs(wx_FE2 - wx_true2_FE));
-error2_RK4 = mean(abs(wx_RK42 - wx_true2_RK4));
-error2_IE = mean(abs(wx_IE2 - wx_true2_IE));
+error2_FE = mean(abs(wx_FE2 - wx_true));
+error2_RK4 = mean(abs(wx_RK42 - wx_true));
+error2_IE = mean(abs(wx_IE2 - wx_true));
 
-error3_FE = mean(abs(wx_FE3 - wx_true3_FE));
-error3_RK4 = mean(abs(wx_RK43 - wx_true3_RK4));
-error3_IE = mean(abs(wx_IE3 - wx_true3_IE));
+error3_FE = mean(abs(wx_FE3 - wx_true));
+error3_RK4 = mean(abs(wx_RK43 - wx_true));
+error3_IE = mean(abs(wx_IE3 - wx_true));
 
-error4_FE = mean(abs(wx_FE4 - wx_true4_FE));
-error4_RK4 = mean(abs(wx_RK44 - wx_true4_RK4));
-error4_IE = mean(abs(wx_IE4 - wx_true4_IE));
+error4_FE = mean(abs(wx_FE4 - wx_true));
+error4_RK4 = mean(abs(wx_RK44 - wx_true));
+error4_IE = mean(abs(wx_IE4 - wx_true));
 
-error5_FE = mean(abs(wx_FE5 - wx_true5_FE));
-error5_RK4 = mean(abs(wx_RK45 - wx_true5_RK4));
-error5_IE = mean(abs(wx_IE5 - wx_true5_IE));
+error5_FE = mean(abs(wx_FE5 - wx_true));
+error5_RK4 = mean(abs(wx_RK45 - wx_true));
+error5_IE = mean(abs(wx_IE5 - wx_true));
 
 err_FE = [error5_FE, error4_FE, error1_FE, error2_FE, error3_FE];
 err_RK4 = [error5_RK4, error4_RK4, error1_RK4, error2_RK4, error3_RK4];
@@ -214,26 +214,17 @@ err_IE = [error5_IE, error4_IE, error1_IE, error2_IE, error3_IE];
 
 dt_arr = [0.001, 0.005, 0.01, 0.05, 0.1];
 
-figure('Name', 'Convergence Analysis', 'Color', 'w');
-loglog(dt_arr, err_FE, '-o', 'LineWidth', 1.5, 'DisplayName', 'Explicit Euler (Slope \approx 1)');
+figure()
+loglog(dt_arr, err_FE);
 hold on; grid on;
-loglog(dt_arr, err_RK4, '-s', 'LineWidth', 1.5, 'DisplayName', 'RK4 (Slope \approx 4)');
-loglog(dt_arr, err_IE, '-d', 'LineWidth', 1.5, 'DisplayName', 'Implicit Euler (Slope \approx 1)');
-
-% Add standard reference lines (Optional but impressive)
-loglog(dt_arr, dt_arr * err_FE(end)/dt_arr(end), 'k--', 'DisplayName', 'O(\Deltat) Reference');
-loglog(dt_arr, dt_arr.^4 * err_RK4(end)/dt_arr(end)^4, 'b--', 'DisplayName', 'O(\Deltat^4) Reference');
-
-xlabel('Time Step \Delta t (s)');
-ylabel('Global Error (Mean Absolute)');
-title('Solver Convergence Study');
-legend('Location', 'best');
-hold off;
+loglog(dt_arr, err_RK4);
+loglog(dt_arr, err_IE);
+legend()
+hold off
 
 
 exportgraphics(figure(1), 'val_Plot_sat.png', 'Resolution', 300);
 exportgraphics(figure(2), 'KE_Plot_sat.png', 'Resolution', 300);
-exportgraphics(figure(3), 'conv_Plot_sat.png', 'Resolution', 300);
 
 function dw_dt = euler_equations(~, w, Ix, Iy, Iz)
     wx = w(1);
