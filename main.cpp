@@ -7,7 +7,7 @@ int main() {
     bool file_exists = (response == 'y' || response == 'Y');
 
     std::string input_filename = "input_file.txt"; 
-    std::string output_filename = "RK4_sat_5.txt"; 
+    std::string output_filename = "IE_RE_3.txt"; 
     Solver ODE_solver;
 
     if (!file_exists) {
