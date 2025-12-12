@@ -23,6 +23,7 @@ void FileParser::extract_data(std::string& filename, ExtractedDataTable& data_ta
         throw std::runtime_error("Line 1 formatting error: Expected [ODE_ID] [Scheme_ID] [T] [dt]");
     }
 
+    // check data is numeric
     if (data_table.dt <= 0) {
         throw std::runtime_error("Time step (dt) must be positive.");
     }
@@ -39,10 +40,11 @@ void FileParser::extract_data(std::string& filename, ExtractedDataTable& data_ta
         param_vec.push_back(val);
     }
 
+    // check the data is numeric
     if (!sstream.eof()) {
         throw std::runtime_error("Formatting error in Line 2: Parameters contains non-numeric characters.");
     }
-    
+
     data_table.ODE_params = param_vec;
 
     // clear the last data from the string stream.
