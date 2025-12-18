@@ -1,2 +1,3 @@
 # cpp_ODE_solver
-The aim of this project was to develop a C++ ODE solver in accordance with the coursework outlines to use a minimum of two integration methods implemented into the solver in a modular fasion. The solver must be tested on at least two ODE systems that have been implemented into the solver in a modular fasion.
+The aim of this project was to develop a C++ ODE solver in accordance with the coursework outlines to use a minimum of two integration methods implemented into the solver in a modular fasion. The solver must be tested on at least two ODE systems that have been implemented into the solver in a modular fasion. This project successfully implemented explicit Euler, implicit Euler and RK4 integration methods. 
+To use the solver a parameter file located in the same directory containing the parameters and solver+ODE indices, the results obtained by the solver will then be saved in a txt file in the same directory.
