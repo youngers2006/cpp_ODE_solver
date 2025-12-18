@@ -1,0 +1,2 @@
+# cpp_ODE_solver
+The aim of this project was to develop a C++ ODE solver in accordance with the coursework outlines to use a minimum of two integration methods implemented into the solver in a modular fasion. The solver must be tested on at least two ODE systems that have been implemented into the solver in a modular fasion.
